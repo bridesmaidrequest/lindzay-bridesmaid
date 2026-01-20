@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lindzayyy 💜</title>
+
+  <style>
+    :root{
+      --purple:#6f3cc3;
+      --purple2:#8c5be6;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(160deg, #f6f0ff, #ffffff);
+      padding:24px;
+      color:#1f1239;
+    }
+
+    .card{
+      width:min(560px,100%);
+      background:#ffffffcc;
+      backdrop-filter: blur(8px);
+      border-radius:26px;
+      box-shadow:0 20px 60px rgba(111,60,195,.25);
+      border:1px solid rgba(111,60,195,.2);
+      overflow:hidden;
+    }
+
+    .top{
+      padding:26px 22px 18px;
+      text-align:center;
+      background: linear-gradient(120deg, rgba(111,60,195,.12), rgba(140,91,230,.10));
+    }
+
+    .badge{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(111,60,195,.25);
+      color:var(--purple);
+      font-weight:600;
+      background:#fff;
+    }
+
+    h1{
+      margin:14px 0 6px;
+      font-size:34px;
+      color:var(--purple);
+    }
+
+    .msg{
+      padding:18px 20px 0;
+      font-size:16px;
+      line-height:1.55;
+      text-align:left;
+    }
+
+    .msg strong{color:var(--purple)}
+
+    /* Slideshow */
+    .slideshow{
+      position:relative;
+      width:100%;
+      aspect-ratio:4/5;
+      margin-top:16px;
+      overflow:hidden;
+    }
+
+    .slide{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transition:opacity 1.2s ease-in-out;
+    }
+
+    .slide.active{opacity:1}
+
+    .bottom{
+      padding:20px 22px 26px;
+      text-align:center;
+    }
+
+    .btns{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    button{
+      border:0;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      font-size:15px;
+      cursor:pointer;
+      max-width:260px;
+      background:linear-gradient(135deg,var(--purple),var(--purple2));
+      color:#fff;
+      box-shadow:0 10px 22px rgba(111,60,195,.28);
+    }
+
+    .tiny{
+      font-size:12px;
+      opacity:.7;
+      margin-top:10px;
+    }
+
+    /* Final Screen */
+    .final-screen{
+      position:fixed;
+      inset:0;
+      background:linear-gradient(160deg,#f6f0ff,#ffffff);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      padding:24px;
+    }
+
+    .final-card{
+      background:#ffffffcc;
+      backdrop-filter:blur(8px);
+      border-radius:26px;
+      padding:32px 26px;
+      text-align:center;
+      box-shadow:0 20px 60px rgba(111,60,195,.25);
+      border:1px solid rgba(111,60,195,.2);
+      max-width:520px;
+    }
+
+    .final-card h1{
+      color:var(--purple);
+      font-size:32px;
+      line-height:1.25;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="top">
+    <span class="badge">A little question… 💜</span>
+    <h1>Lindzayyy,</h1>
+    <p>Will you be my bridesmaid?</p>
+  </div>
+
+  <div class="msg">
+    <p><strong>My dearest Lindzayyy!!</strong><br>
+    I know this is coming late (because my planning is rubbish) but I would love to have you by my side on my big day.
+    If I don’t hear “Bonsi” or “A peng ting” on the day I just might not be able to go through with it.
+    Having you by my side will be a dream come true my friend❤️</p>
+  </div>
+
+  <div class="slideshow">
+    <img src="photo1.jpg" class="slide active" alt="Us">
+    <img src="photo2.jpg" class="slide" alt="Us">
+    <img src="photo3.jpg" class="slide" alt="Us">
+  </div>
+
+  <div class="bottom">
+    <div class="btns">
+      <button class="yes" data-msg="BONSII, you don’t even need to ask! 😭💜">
+        YES: BONSII, you don’t even need to ask!
+      </button>
+
+      <button class="yes" data-msg="Tell Mr A peng ting to move his things out 😂💜">
+        YES: tell Mr A peng ting to move his things out
+      </button>
+    </div>
+    <div class="tiny">Made with love 💜</div>
+  </div>
+</div>
+
+<!-- Final Screen -->
+<div class="final-screen" id="finalScreen">
+  <div class="final-card">
+    <h1>Blessed to have my best girl<br>on my best day 💜</h1>
+  </div>
+</div>
+
+<script>
+  /* Slideshow */
+  const slides = document.querySelectorAll('.slide');
+  let i = 0;
+  setInterval(() => {
+    slides[i].classList.remove('active');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('active');
+  }, 3000);
+
+  /* WhatsApp YES tracking */
+  const finalScreen = document.getElementById('finalScreen');
+  const phoneNumber = "447552880116";
+
+  document.querySelectorAll('.yes').forEach(btn => {
+    btn.onclick = () => {
+      const message = btn.getAttribute('data-msg');
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+      finalScreen.style.display = 'flex';
+    };
+  });
+</script>
+
+</body>
+</html>
